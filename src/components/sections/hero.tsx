@@ -27,11 +27,11 @@ export function Hero() {
       id="top"
       ref={ref}
       aria-label="Welcome to Tulas International School"
-      className="grain relative isolate flex min-h-screen flex-col justify-end overflow-hidden bg-ink text-[#f7f2e8] md:min-h-[100svh]"
+      className="grain relative isolate flex min-h-screen flex-col justify-end overflow-hidden bg-[#0e0c0a] text-[#f7f2e8] md:min-h-[100svh]"
     >
       {/* Background plate */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        <ScaleOnScroll className="h-full w-full" from={reduceMotion ? 1 : 1.16} to={1}>
+        <ScaleOnScroll className="h-full w-full">
           <Image
             src={hero.image}
             alt={hero.imageAlt}

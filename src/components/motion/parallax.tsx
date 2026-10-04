@@ -49,18 +49,20 @@ export function Parallax({ children, className, distance = 90, scaleFrom, scaleT
 type ScaleOnScrollProps = {
   children: ReactNode;
   className?: string;
+  /** Zoom when the section is pinned, and as it scrolls away. Both stay > 1 so
+   *  the plate always covers its frame — the container clips the overscan. */
   from?: number;
   to?: number;
 };
 
 /** Slow Ken-Burns style scale tied to scroll position — used on the hero. */
-export function ScaleOnScroll({ children, className, from = 1.12, to = 1 }: ScaleOnScrollProps) {
+export function ScaleOnScroll({ children, className, from = 1.18, to = 1.08 }: ScaleOnScrollProps) {
   const ref = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const scale = useTransform(scrollYProgress, [0, 1], [from, to]);
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "16%"]);
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "-4%"]);
 
   if (reduceMotion) return <div className={className}>{children}</div>;
 

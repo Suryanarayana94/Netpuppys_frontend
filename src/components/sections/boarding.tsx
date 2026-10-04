@@ -62,16 +62,19 @@ export function Boarding() {
         <div>
           {/* Campus photo with the school's polo cut-out breaking the frame. */}
           <div className="relative">
-            <Parallax distance={70} className="overflow-hidden rounded-3xl border border-line">
-              <Image
-                src="/images/hero/campus-aerial.webp"
-                alt="Aerial view of the Tulas International School campus"
-                width={1920}
-                height={1080}
-                sizes="(min-width: 1024px) 46vw, 92vw"
-                className="aspect-4/3 w-full object-cover object-[60%_65%]"
-              />
-            </Parallax>
+            <div className="relative overflow-hidden rounded-3xl border border-line bg-bg-soft">
+              <Parallax distance={60} className="h-full">
+                <Image
+                  src="/images/hero/campus-aerial.webp"
+                  alt="Aerial view of the Tulas International School campus"
+                  width={1920}
+                  height={1080}
+                  sizes="(min-width: 1024px) 46vw, 92vw"
+                  /* Scaled past 100% so the parallax travel never exposes a gap. */
+                  className="aspect-4/3 w-full scale-[1.22] object-cover object-[60%_65%]"
+                />
+              </Parallax>
+            </div>
 
             <div
               aria-hidden="true"
