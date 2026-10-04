@@ -3,7 +3,8 @@
 A ground-up redesign of the [Tulas International School](https://tis.edu.in/) homepage
 (Dehradun, Uttarakhand) built as a single, production-ready page.
 
-**Live:** `<add your Vercel URL here>` · **Stack:** Next.js 16 (App Router) · TypeScript ·
+**Source:** https://github.com/Suryanarayana94/Netpuppys_frontend ·
+**Live:** `<paste your Vercel URL here>` · **Stack:** Next.js 16 (App Router) · TypeScript ·
 Tailwind CSS v4 · Framer Motion · Lenis
 
 The brief was to keep TIS's branding and copy while rebuilding the page as a modern,
@@ -74,8 +75,8 @@ Extras:
 Requires **Node.js 20.19+ or 22.13+** (Next 16's floor). Developed on Node 22.
 
 ```bash
-git clone <your-repo-url>
-cd tis-homepage
+git clone https://github.com/Suryanarayana94/Netpuppys_frontend.git
+cd Netpuppys_frontend
 npm install
 npm run dev
 ```
