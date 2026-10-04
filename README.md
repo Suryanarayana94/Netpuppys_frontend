@@ -3,9 +3,9 @@
 A ground-up redesign of the [Tulas International School](https://tis.edu.in/) homepage
 (Dehradun, Uttarakhand) built as a single, production-ready page.
 
+**Live:** https://netpuppys-frontend.vercel.app ·
 **Source:** https://github.com/Suryanarayana94/Netpuppys_frontend ·
-**Live:** `<paste your Vercel URL here>` · **Stack:** Next.js 16 (App Router) · TypeScript ·
-Tailwind CSS v4 · Framer Motion · Lenis
+**Stack:** Next.js 16 (App Router) · TypeScript · Tailwind CSS v4 · Framer Motion · Lenis
 
 The brief was to keep TIS's branding and copy while rebuilding the page as a modern,
 motion-led experience. Every word, statistic, name and link on this page is carried over
@@ -15,17 +15,28 @@ from the live site; only the presentation is new.
 
 ## Contents
 
-- [Highlights](#highlights)
-- [Tech stack](#tech-stack)
-- [Getting started](#getting-started)
-- [npm scripts](#npm-scripts)
-- [Project structure](#project-structure)
-- [Architecture notes](#architecture-notes)
-- [Design system](#design-system)
-- [Deployment](#deployment)
-- [Accessibility](#accessibility)
-- [Performance](#performance)
-- [Content & asset credits](#content--asset-credits)
+- [TIS — Animated Homepage Redesign](#tis--animated-homepage-redesign)
+  - [Contents](#contents)
+  - [Highlights](#highlights)
+  - [Tech stack](#tech-stack)
+  - [Getting started](#getting-started)
+    - [npm scripts](#npm-scripts)
+  - [Project structure](#project-structure)
+  - [Architecture notes](#architecture-notes)
+    - [1. No theme provider, and no flash of the wrong theme](#1-no-theme-provider-and-no-flash-of-the-wrong-theme)
+    - [2. Scroll-linked values never touch React state](#2-scroll-linked-values-never-touch-react-state)
+    - [3. One easing curve, one set of triggers](#3-one-easing-curve-one-set-of-triggers)
+    - [4. Lenis does not break anything else](#4-lenis-does-not-break-anything-else)
+    - [5. Cut-outs vs. photographs](#5-cut-outs-vs-photographs)
+    - [6. Imagery is pre-optimised](#6-imagery-is-pre-optimised)
+  - [Design system](#design-system)
+  - [Deployment](#deployment)
+    - [Vercel (recommended — zero config)](#vercel-recommended--zero-config)
+    - [Netlify](#netlify)
+    - [GitHub Pages](#github-pages)
+  - [Accessibility](#accessibility)
+  - [Performance](#performance)
+  - [Content \& asset credits](#content--asset-credits)
 
 ---
 
@@ -239,6 +250,9 @@ Sans** (UI and body) and **JetBrains Mono** (labels, indices and metadata).
 
 The page is fully static apart from image optimisation, so it deploys as an ISR route
 with a one-day revalidate window.
+
+**It is live at https://netpuppys-frontend.vercel.app**, deployed from this repository
+with the stock Vercel Next.js preset — no build settings, no environment variables.
 
 ### Vercel (recommended — zero config)
 
