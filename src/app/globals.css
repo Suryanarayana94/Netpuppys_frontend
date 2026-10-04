@@ -1,0 +1,276 @@
+@import "tailwindcss";
+
+/* Theme is driven by a data attribute, not the OS, so the toggle can override it. */
+@custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ------------------------------------------------------------------ *
+ *  TIS — design tokens
+ *  Colours are sampled from the existing TIS brand assets:
+ *  gold #C09D59 (yellowLine), crimson #B90124, leaf #5AB232, cream #F8F5F0.
+ * ------------------------------------------------------------------ */
+
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #0e0c0a;
+  --bg-soft: #14110d;
+  --surface: #191510;
+
+  --text: #f7f2e8;
+  --text-muted: #a49d90;
+  --text-subtle: #6d675e;
+
+  --line: rgba(247, 242, 232, 0.12);
+  --line-strong: rgba(247, 242, 232, 0.26);
+
+  /* Crimson reads muddy on near-black, so dark mode uses a lifted tint. */
+  --brand: #ff4a5e;
+  --brand-deep: #b90124;
+  --gold: #dcb45c;
+  --leaf: #7cc94f;
+
+  --glow: rgba(220, 180, 92, 0.28);
+  --grain-opacity: 0.05;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: #fbf8f2;
+  --bg-soft: #f4efe5;
+  --surface: #ffffff;
+
+  --text: #14110e;
+  --text-muted: #5b544a;
+  --text-subtle: #8b8478;
+
+  --line: rgba(20, 17, 14, 0.12);
+  --line-strong: rgba(20, 17, 14, 0.24);
+
+  --brand: #b90124;
+  --brand-deep: #8f0120;
+  --gold: #9a7420;
+  --leaf: #4a8f28;
+
+  --glow: rgba(154, 116, 32, 0.18);
+  --grain-opacity: 0.035;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-soft: var(--bg-soft);
+  --color-surface: var(--surface);
+
+  --color-ink: var(--text);
+  --color-muted: var(--text-muted);
+  --color-subtle: var(--text-subtle);
+
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --color-brand: var(--brand);
+  --color-brand-deep: var(--brand-deep);
+  --color-gold: var(--gold);
+  --color-leaf: var(--leaf);
+
+  --font-display: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-jakarta), ui-monospace, "SFMono-Regular", monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ------------------------------------------------------------------ *
+ *  Base
+ * ------------------------------------------------------------------ */
+
+* {
+  border-color: var(--line);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  overflow-x: clip;
+  transition: background-color 0.5s var(--ease-out-expo), color 0.5s var(--ease-out-expo);
+}
+
+::selection {
+  background: var(--gold);
+  color: #14110e;
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Published by <CustomCursor> once a fine pointer + full motion are detected. */
+html[data-cursor-custom] body,
+html[data-cursor-custom] a,
+html[data-cursor-custom] button,
+html[data-cursor-custom] summary,
+html[data-cursor-custom] [data-cursor] {
+  cursor: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  /* Keeps freshly decoded images from flashing unstyled during theme swaps. */
+  color: transparent;
+}
+
+/* ------------------------------------------------------------------ *
+ *  Layout primitives
+ * ------------------------------------------------------------------ */
+
+@utility shell {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 90rem;
+  padding-inline: 1.25rem;
+
+  @media (width >= 48rem) {
+    padding-inline: 2.5rem;
+  }
+
+  @media (width >= 80rem) {
+    padding-inline: 3.5rem;
+  }
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+/* ------------------------------------------------------------------ *
+ *  Motion primitives (CSS keyframes, used where JS is overkill)
+ * ------------------------------------------------------------------ */
+
+@keyframes tis-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes tis-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0) rotate(1.5deg);
+  }
+}
+
+@keyframes tis-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@utility animate-marquee {
+  animation: tis-marquee var(--marquee-duration, 38s) linear infinite;
+}
+
+@utility animate-drift {
+  animation: tis-drift 7s ease-in-out infinite;
+}
+
+@utility animate-pulse-ring {
+  animation: tis-pulse 2.6s ease-out infinite;
+}
+
+/* Film grain — one inline SVG, no extra request. */
+@utility grain {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: var(--grain-opacity);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ *  Lenis smooth scrolling
+ * ------------------------------------------------------------------ */
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+/* ------------------------------------------------------------------ *
+ *  Reduced motion — kill decorative loops, keep the layout
+ * ------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-marquee,
+  .animate-drift,
+  .animate-pulse-ring {
+    animation: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
